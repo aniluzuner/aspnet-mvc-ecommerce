@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'cocogoose';
+    src: url('fonts/Cocogoose.eot');
+    src: local('Cocogoose'), url('fonts/Cocogoose.eot?#iefix') format('embedded-opentype'), url('fonts/Cocogoose.woff2') format('woff2'), url('fonts/Cocogoose.woff') format('woff'), url('fonts/Cocogoose.ttf') format('truetype'), url('fonts/Cocogoose.svg#Cocogoose') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: bahnschrift !important;
+}
+
+h1, h2 {
+    font-family: cocogoose;
+}
+
+.renk {
+    color: #3A1078 !important;
+}
+
+.bg-renk {
+    background: linear-gradient(180deg, rgb(47, 88, 205) 5%, rgb(78, 49, 170) 50%, rgb(58, 16, 120) 100%) !important;
+}
+
+.btn-renk {
+    background: rgb(58, 16, 120);
+    background: linear-gradient(180deg, rgb(47, 88, 205) 5%, rgb(78, 49, 170) 50%, rgb(58, 16, 120) 100%) !important;
+    border: 0px !important;
+}
+
+.logo {
+    font-family: cocogoose;
+    font-size: calc(1vw + 3vh) !important;
+    background: -webkit-linear-gradient(270deg, rgb(47, 88, 205) 5%, rgb(78, 49, 170) 50%, rgb(58, 16, 120) 100%) !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.marka-logo {
+    transition: all 0.3s ease;
+}
+
+.marka-logo:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.login label {
+    font-family: bahnschrift condensed;
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+input:not([type=radio]):not([type=checkbox]):not([type=search]),
+input:not([type=radio]):not([type=checkbox]):not([type=search]):focus {
+    background: #F0F0F3 !important;
+    border: 0 !important;
+    border-radius: 10px !important;
+    font-family: bahnschrift !important;
+}
+
+input[type=search]:focus {
+    box-shadow: none !important;
+}
+
+input:not([type=radio]):not([type=checkbox]):not([type=search]):focus {
+    box-shadow: 0px 0px 5px 4px #3A1078 !important;
+}
+
+select,
+textarea {
+    background-color: #F0F0F3 !important;
+    border: 0 !important;
+    border-radius: 10px !important;
+    resize: none !important;
+}
+
+select:focus,
+textarea:focus {
+    box-shadow: 0px 0px 5px 4px #3A1078 !important;
+}
+
+
+/* LOGIN */
+.login .nav-tabs {
+  background-color: #F0F0F3 !important;
+  border-radius: 15px;
+}
+
+.login .nav-tabs,
+.login .nav-link {
+  border: 0 !important;
+  border-radius: 15px !important;
+}
+
+.login .nav-tabs .nav-link.active {
+  color: white !important;
+  background: rgb(58, 16, 120);
+  background: linear-gradient(120deg, rgb(47, 88, 205) 5%, rgb(78, 49, 170) 40%, rgb(58, 16, 120) 100%) !important;
+  border: 0 !important;
+}
+
+.login .tab-content {
+  box-shadow: 0px 3px 20px 5px #a7a7a7;
+}
+
+.product .card {
+    transition: all 0.3s ease !important;
+}
+
+.product .card:hover {
+    box-shadow: 0px 3px 6px 8px #e9ecef !important;
+    transform: scale(1.1) !important;
+}
+
+.product .card .card-title {
+    font-size: 1.15rem;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+.fa-star {
+  color: gray;
+}
+
+.fa-star{
+  font-size: 0.90em;
+}
+
+.full-star {
+  color: orange;
+}
+
+.half-star {
+  background: linear-gradient(to right, orange 50%, gray 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+

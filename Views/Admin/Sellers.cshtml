@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Sellers";
+    Layout = "~/Layouts/AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid bg-white rounded-4 h-100">
+    <div class="row h-100">
+        <div class="col-6 p-4 h-100 overflow-y-auto">
+            <div class="h2 mb-3">Onay Bekleyen Mağazalar</div>
+            <table class="table table-dark table-hover rounded-3 overflow-hidden align-middle">
+                <thead>
+
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Mağaza Adı</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var seller in ViewBag.OnaysizMagazalar)
+                    {
+                        <tr>
+                            <th scope="row" class="fs-5">@seller.Id</th>
+                            <td class="fs-5">@seller.Name</td>
+                            <td>@seller.Email</td>
+                            <td>
+                                <a href="/Admin/SellerApprove/@seller.Id" class="btn btn-success p-1 me-2">Onayla</a>
+                                <a href="/Admin/DeleteSeller/@seller.Id" class="btn btn-outline-danger p-1">Reddet</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-6 p-4 h-100 overflow-y-auto">
+            <div class="h2 mb-3">Onaylı Mağazalar</div>
+            <table class="table table-dark table-hover rounded-3 overflow-hidden align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Mağaza Adı</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var seller in ViewBag.OnayliMagazalar)
+                     {
+                        <tr>
+                            <th scope="row" class="fs-5">@seller.Id</th>
+                            <td class="fs-5">@seller.Name</td>
+                            <td>@seller.Email</td>
+                            <td><a href="/Admin/DeleteSeller/@seller.Id" class="btn btn-outline-danger p-1">Sil</a></td>
+
+                        </tr>
+                     }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+

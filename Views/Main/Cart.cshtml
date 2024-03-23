@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+
+    Layout = "~/Layouts/CustomerLayout.cshtml";
+}
+
+<div class="container-fluid my-3 p-5 cart-container">
+    <div class="row" id="cart-container">
+        <div class="col-12 p-0">
+            <h1 class="h1 display-5 m-auto fw-bold mb-5 d-flex lh-1">Sepetim</h1>
+        </div>      
+
+        <div class="col-9 p-0">
+            <div class="container-fluid">
+                <div class="row" id="cart-items">
+
+                </div>
+            </div>   
+        </div>
+
+        <div class="col-3 p-0 ps-5">
+            <div class="border rounded-3 p-4" style="border-color: rgb(0 0 0 / 18%) !important;">
+                <p class=" fs-5 fw-bold lh-1 renk">SEPET TOPLAM</p>
+                <p class="fs-1 fw-bold" id="cart-total">5.555 TL</p>
+                <a href="/Main/CreateOrder"  class="btn btn-renk btn-lg text-white w-100 fw-bold rounded-3" >Alışverişi Tamamla</a>
+            </div>
+
+
+            <button onclick="EmptyCart()" class="btn btn-outline-dark fw-bold w-100 fs-5 p-3 ms-auto mt-4"> SEPETİ BOŞALT <i class="fa-solid fa-trash-can ms-1"></i></button>
+
+        </div>
+
+
+
+
+    </div>
+</div>
+

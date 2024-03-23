@@ -1,0 +1,92 @@
+﻿@model eticaret.Models.Product
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Layouts/CustomerLayout.cshtml";
+}
+
+<div class="container-fluid px-5">
+    <div class="row py-5">
+        <div class="col-12 col-md-6">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/Content/Images/ProductImages/@Model.Id/1.jpg" class="d-block w-50 m-auto" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Content/Images/ProductImages/@Model.Id/2.jpg" class="d-block w-50 m-auto" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Content/Images/ProductImages/@Model.Id/3.jpg" class="d-block w-50 m-auto" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                <div class="carousel-indicators w-50 mx-auto m-0 p-0 pt-5 position-static">
+                    <img class="active w-25 h-100" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" src="~/Content/Images/ProductImages/@Model.Id/1.jpg" alt="">
+                    <img class="active w-25 h-100" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-current="true" aria-label="Slide 2" src="~/Content/Images/ProductImages/@Model.Id/2.jpg" alt="">
+                    <img class="active w-25 h-100" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-current="true" aria-label="Slide 3" src="~/Content/Images/ProductImages/@Model.Id/3.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 col-md-6">
+            <h3>@Model.Name</h3>
+            <img src="~/Content/Images/Brands/@Url.Content(Model.BrandID+".jpg")" width="10%" alt="">
+            <div class="pt-4 pb-2">
+                @for (int i = 1; i <= 5; i++)
+                {
+
+                    if (Model.Rating >= i - 0.5)
+                    {
+
+                        <i class='fa-solid fa-star full-star'></i>
+
+                    }
+                    else if (Model.Rating > i - 1)
+                    {
+                        <i class='fa-solid fa-star half-star'></i>
+                    }
+
+                    else
+                    {
+                        <i class='fa-solid fa-star'></i>
+                    }
+                }
+            </div>
+            <div class="display-5 fw-bold py-3">@Model.Price TL</div>
+            <div class="h5  @(Model.Stock >= 1 ? new HtmlString("text-success") : new HtmlString("text-danger"))">
+                @(Model.Stock >= 1 ? new HtmlString("Stokta") : new HtmlString("Elimizde Yok"))
+            </div>
+            <div class="h5">Satıcı: @ViewBag.SellerName</div>
+            <div class="mt-4"><a class="btn btn-renk text-white px-4 py-3 fs-4 fw-bold" href="/Sepet" onclick="AddToCart(@Model.Id);"> <i class="fa-solid fa-basket-shopping me-2"></i> Sepete Ekle </a></div>
+            
+            <ul class="nav nav-tabs pt-4" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link text-black active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Ürün Açıklaması</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link text-black" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Değerlendirmeler</button>
+                </li>
+            </ul>
+            <div class="tab-content p-3" id="myTabContent">
+                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">@(new HtmlString(Model.Detail))</div>
+                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            
+        </div>
+    </div>
+
+</div>
+

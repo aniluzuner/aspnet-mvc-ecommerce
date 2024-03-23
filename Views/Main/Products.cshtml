@@ -1,0 +1,235 @@
+﻿@{
+    ViewBag.Title = "Products";
+    Layout = "~/Layouts/CustomerLayout.cshtml";
+}
+
+<div class="container-fluid px-5">
+    <div class="row">
+        <h1 class="fw-bold my-4 p-0">@ViewBag.CategoryName</h1>
+        <div class="col-2 p-0 pe-3">
+            <div class="bg-renk text-white rounded-3 p-4">
+                <select class="form-select rounded-2 text-white border-0" name="SortBy" id="SortBy" style="background-color: #3A1078 !important; cursor: pointer;">
+                    <option selected>Sırala</option>
+                    <option value="FiyatArtan">Fiyat Artan</option>
+                    <option value="FiyatAzalan">Fiyat Azalan</option>
+                    <option value="PuanArtan">Puan Artan</option>
+                    <option value="PuanAzalan">Puan Azalan</option>
+                </select>
+
+                <div>
+                    <div class="fs-5 fw-bold my-2">Kategori</div>
+                    @foreach (var subCategory in ViewBag.SubCategories)
+                     {
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="CategoryID" value="@subCategory.Id" id="@subCategory.Name">
+                            <label class="form-check-label fs-5" for="@subCategory.Name" >
+                                @subCategory.Name
+                            </label>
+                        </div>
+                     }    
+                </div>
+
+                <div>
+                    <div class="fs-5 fw-bold my-2">Marka</div>
+
+                    @foreach (var Brand in ViewBag.Brands)
+                     {
+
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="@Brand.Id" name="Brand @Brand.Id " id="@Brand.Name">
+                            <label class="form-check-label" for="@Brand.Name">@Brand.Name</label>
+                        </div>
+                     }          
+                </div>
+
+                <div class="container">
+                    <div class="row p-0">
+                        <div class="fs-5 fw-bold my-2 p-0">Fiyat</div>
+                        <div class="col-6 p-0 pe-1">
+                            <input type="number" class="form-control form-control-sm w-100" name="minprice">
+                        </div>
+                        <div class="col-6 p-0 ps-1">
+                            <input type="number" class="form-control form-control-sm w-100" name="maxprice">
+                        </div>
+                        <!-- <div class="col-2">
+                          <button class="btn btn-renk"><i class="fa-solid fa-magnifying-glass renk"></i></button>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div>
+                    <div class="fs-5 fw-bold mt-3 mb-1">Puan</div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Rating" id="rating4">
+                        <label class="form-check-label" for="rating4">
+                            <i class="fa-solid fa-star full-star"></i> 4 ve üzeri
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Rating" id="rating3">
+                        <label class="form-check-label" for="rating3">
+                            <i class="fa-solid fa-star full-star"></i> 3 ve üzeri
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Rating" id="rating2">
+                        <label class="form-check-label" for="rating2">
+                            <i class="fa-solid fa-star full-star"></i> 2 ve üzeri
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Rating" id="rating1">
+                        <label class="form-check-label" for="rating1">
+                            <i class="fa-solid fa-star full-star"></i> 1 ve üzeri
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+
+                    <div class="fs-5 fw-bold mt-3 mb-1">Satıcı</div>
+
+
+                    @foreach (var Seller in ViewBag.Sellers)
+                     {
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Seller @Seller.Id" value="@Seller.Id" id="@Seller.Name">
+                            <label class="form-check-label" for="@Seller.Name">@Seller.Name</label>
+                        </div>
+
+                     }
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-10">
+            <div class="row" id="products"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        filterProducts();
+    });  
+        
+      var sortBy;
+      var selectedCategoryID;
+      var selectedBrands = [];
+      var minPrice;
+      var maxPrice;
+      var selectedRating;
+      var selectedSellerID = [];
+
+      $("select[name='SortBy']").on("change", function(){
+        sortBy = $(this).val();
+        filterProducts();
+      })
+
+      $("input[name='CategoryID']").on("change", function(){
+        selectedCategoryID = $(this).val();
+        filterProducts();
+      });
+
+      $("input[name^='Brand']").on("change", function(){
+        if ($(this).is(":checked")){
+          selectedBrands.push($(this).val());
+        }
+        else{
+          var index = selectedBrands.indexOf($(this).val());
+          if (index !== -1){
+            selectedBrands.splice(index,1);
+          }
+        }
+        filterProducts();
+      });
+
+      $("input[name='minprice']").on("change", function() {
+        minPrice = $(this).val();
+        filterProducts();
+      });
+
+      $("input[name='maxprice']").on("change", function() {
+        maxPrice = $(this).val();
+        filterProducts();
+      });
+
+      $("input[name='Rating']").on("change", function(){
+        selectedRating = $(this).val();
+        filterProducts();
+      });
+
+      $("input[name^='Seller']").on("change", function(){
+        if ($(this).is(":checked"))
+          selectedSellerID.push($(this).val());
+        else {
+          var index = selectedSellerID.indexOf($(this).val());
+          if (index !== -1)
+            selectedSellerID.splice(index,1);
+        }
+        filterProducts();
+      });
+
+      function filterProducts(){
+        $.ajax({
+          url: '/Main/FilterProducts',
+          type: 'GET',
+          data: {
+            SortBy: sortBy,
+            CategoryID:@ViewBag.CategoryID,
+            subCategoryID: selectedCategoryID,
+            Brands: selectedBrands.join(''),
+            MinPrice: minPrice,
+            MaxPrice: maxPrice,
+            Rating: selectedRating,
+            Sellers: selectedSellerID.join(',')
+          },
+          success: function (result){
+              var products ="";
+              
+            $.each(result, function(index, product) {
+                var stars=" ";
+                var Rating = parseInt(product.Rating);
+
+              for(var i=1;i<=5;i++){
+                if(Rating >= i-0.5)
+                  stars += '<i class="fa-solid fa-star full-star"></i>';
+                else if(Rating > i-1)
+                  stars += '<i class="fa-solid fa-star half-star"></i>';
+                else
+                  stars += '<i class="fa-solid fa-star"></i>';
+              }
+
+                products += '<div class="col-6 col-md-4 col-xl-3 p-0 pb-5 product">' +
+              '  <div class="card m-auto border-0" style="width:90%;">' +
+              '    <img src="/Content/Images/ProductImages/'+ product.Id  +'/1.jpg" class="card-img-top m-auto mt-4 mb-3" style="width: 60%;" alt="...">' +
+              '    <div class="card-body px-4">' +
+              '      <div class="d-flex">' +
+              '        <img src="/Content/Images/Brands/'+ product.BrandID +'.jpg" width="35%" alt="">' +
+              '        <div class="ms-auto d-flex align-items-center pe-1">' + stars +
+              '        </div>' +
+              '      </div>' +
+              '      <h5 class="card-title mt-2">'+ product.Name +'</h5>' +
+              '      <div class="fs-2 fw-bold mt-4 lh-1">'+ product.Price.toLocaleString() +'</div>' +
+              '      <a href="/urun?id='+ product.Id +'" class="stretched-link"></a>' +
+              '    </div>' +
+              '  </div>' +
+              '</div>';
+            });
+
+            $('#products').html(products);
+          },
+          error: function (xhr, status, error){
+            console.log("AJAX hatası: " + error);
+            alert("Bir hata oluştu!");
+          }
+        });
+      }
+</script>
+

@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Ürün Ekle";
+    Layout = "~/Layouts/SellerLayout.cshtml";
+    var Sellerid = User.Identity.Name;
+}
+
+<div class="container-fluid bg-white rounded-4 h-100">
+    @using (Html.BeginForm("AddProduct", "Seller", FormMethod.Post, new {enctype = "multipart/form-data"}))
+    {
+
+        <form autocomplete="off">
+            <div class="row p-4">
+                <div class="h2 p-0">Ürün Ekle</div>
+                <div class="col-6 p-4 border">
+                    <label for="" class="form-label">Görseller</label>
+                    <input class="form-control" type="file" name="image1" required>
+                    <input class="form-control mt-4" type="file" name="image2">
+                    <input class="form-control mt-4" type="file" name="image3">
+                </div>
+                <div class="col-6 p-4 border">
+
+                    <label for="" class="form-label">Ürün Başlığı</label>
+                    <input type="text" class="form-control" name="name" required>
+                    
+                    <label for="" class="form-label mt-4">Marka</label>
+                    <select class="form-select" name="brand" required>
+                        <option value="" selected disabled>Seçiniz...</option>
+                        @foreach (var Brand in ViewBag.Brands)
+                         {
+                            
+                            <option value="@Brand.Id">@Brand.Name</option>
+
+                         }
+                    </select>
+                
+                    <label for="" class="form-label mt-4">Kategori</label>
+                    <select class="form-select" name="categoryId" id="CategoryId" onchange="UpdateSubCategories()" required>
+                        <option value="" selected disabled>Seçiniz...</option>
+                        @foreach (var Category in ViewBag.Categories)
+                         {
+
+                            <option value="@Category.Id">@Category.Name</option>
+
+                         }
+                    </select>
+                                            
+                    <label for="" class="form-label mt-4">Alt Kategori</label>
+                    <select class="form-select" name="subcategoryId" id="SubCategoryId" required>
+                        <option value="" selected disabled>Seçiniz...</option>
+                        @foreach (var subCategory in ViewBag.SubCategories)
+                        {
+
+                            <option value="@subCategory.Id" style="display:none;" class="ParentCategoryID-@subCategory.ParentCategoryID">@subCategory.Name</option>
+
+                        }
+                    </select>
+
+                    <script>
+                        function UpdateSubCategories() {
+                            var CategoryId = document.getElementById("CategoryId").value;
+
+                            var SubCategories = document.getElementById("SubCategoryId").querySelectorAll("option");
+
+                            SubCategories.forEach(function (option) {
+                                option.style.display = "none";
+                            });
+
+                            var SubCategories = document.getElementById("SubCategoryId").querySelectorAll(".ParentCategoryID-"+CategoryId);
+
+                            SubCategories.forEach(function (option) {
+                                option.style.display = "block";
+                            });
+                        }
+                    </script>
+                
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <label for="" class="form-label">Fiyat</label>
+                            <input type="number" class="form-control" name="price" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">Stok</label>
+                            <input type="number" class="form-control" name="stock" required>
+                        </div>
+                    </div>
+
+                    <label for="" class="form-label mt-4">Ürün Açıklaması</label>
+                    <textarea class="form-control" name="description" rows="8"></textarea>
+                </div>
+
+                <input type="hidden" name="SellerId" value="@Sellerid" />
+
+                <div class="d-flex justify-content-center mt-3">
+                     <button type="submit" class="py-2 px-5 btn btn-outline-dark rounded-1">
+                          Ürün Ekle
+                     </button>
+                </div>
+
+            </div>
+
+            
+        </form>
+     
+     }
+</div>
+

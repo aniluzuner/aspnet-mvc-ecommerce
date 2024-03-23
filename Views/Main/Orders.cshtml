@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Layouts/CustomerLayout.cshtml";
+}
+
+<div class="container bg-white rounded-4 h-100">
+    <div class="row h-100">
+        <div class="col-12 p-0 h-100 ">
+            <div class="h2 mb-3 mt-2">Siparişlerim</div>
+            <table class="table table-dark table-hover rounded-3 overflow-hidden">
+                <thead>
+                    <tr>
+                        <th scope="col">Sipariş Id</th>
+                        <th scope="col">Ürün</th>
+                        <th scope="col">Toplam</th>
+                        <th scope="col">Satıcı</th>
+                        <th scope="col">Durum</th>
+                        <th scope="col">Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Order in Model)
+                     {
+                        <tr>
+                            <th scope="row">@Order.OrderId</th>
+                            <td>@Order.ProductName x @Order.ProductQuantity</td>
+                            <td>@Order.TotalPrice</td>
+                            <td>@Order.SellerName</td>
+                            <td>@Order.Status</td>
+                            <td>@Order.Date</td>
+                        </tr>
+                     }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+

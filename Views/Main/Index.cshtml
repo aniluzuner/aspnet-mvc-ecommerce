@@ -1,0 +1,197 @@
+﻿@model IEnumerable<eticaret.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Layouts/CustomerLayout.cshtml";
+}
+
+
+<div class="container-fluid px-5 pb-3">
+    <div class="row">
+        <div class="col-12 p-0">
+            <div id="index-carousel" class="carousel slide p-0 m-0 border-0">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#index-carousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    <button type="button" data-bs-target="#index-carousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#index-carousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#index-carousel" data-bs-slide-to="3"></button>
+                    <button type="button" data-bs-target="#index-carousel" data-bs-slide-to="4"></button>
+                </div>
+                <div class="carousel-inner rounded rounded-3 p-0 m-0 border-0">
+                    <div class="carousel-item active">
+                        <a href="#" class="d-block" style="height: 600px; background: url('../Content/Images/Banners/carousel-image.jpg') no-repeat center center / cover;"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="#" class="d-block" style="height: 600px; background: url('../Content/Images/Banners/carousel-image.jpg') no-repeat center center / cover;"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="#" class="d-block" style="height: 600px; background: url('../Content/Images/Banners/carousel-image.jpg') no-repeat center center / cover;"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="#" class="d-block" style="height: 600px; background: url('../Content/Images/Banners/carousel-image.jpg') no-repeat center center / cover;"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="#" class="d-block" style="height: 600px; background: url('../Content/Images/Banners/carousel-image.jpg') no-repeat center center / cover ;"></a>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#index-carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#index-carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid px-5">
+    
+    <div class="row py-5">
+        <div class="col-12 col-md-6 col-xl-3 p-0 py-3">
+            <a href="urunler?CategoryID=3" class="d-block rounded-3 w-100 h-100" style="background: url('../Content/Images/Banners/banner.jpg') center center / cover no-repeat;"></a>
+        </div>
+        
+        @foreach (var hazirsistem in ViewBag.HazirSistemler)
+         {
+            <div class="col-12 col-md-6 col-xl-3 p-0 py-3 product">
+                <div class="card m-auto border-0" style="width:85%;">
+                    <img src="~/Content/Images/ProductImages/@hazirsistem.Id/1.jpg" class="card-img-top m-auto mt-4 mb-3" style="width: 60%;" alt="...">
+                    <div class="card-body px-4">
+                        <div class="d-flex">
+                            <img src="~/Content/Images/Brands/@Url.Content(hazirsistem.BrandID+".jpg")" width="20%" alt="">
+                            <div class="ms-auto d-flex align-items-center pe-1">
+                                @for (int i = 1; i <= 5; i++)
+                                 {
+
+                                    if (hazirsistem.Rating >= i - 0.5)
+                                    {
+
+                                        <i class='fa-solid fa-star full-star'></i>
+
+                                    }
+                                    else if (hazirsistem.Rating > i - 1)
+                                    {
+                                        <i class='fa-solid fa-star half-star'></i>
+                                    }
+
+                                    else
+                                    {
+                                        <i class='fa-solid fa-star'></i>
+                                    }
+                                 }
+                            </div>
+                        </div>
+
+                        <h5 class="card-title mt-2">@hazirsistem.Name</h5>
+
+                        <div class="fs-2 fw-bold mt-4 lh-1">@hazirsistem.Price TL</div>
+                        <a href="urun?id=@hazirsistem.Id" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+         }
+
+    </div>
+        
+    <div class="row pt-3">
+        <div class="col-12 col-md-6 p-0 pe-md-2 pb-3">
+            <a href="#"><img src="~/Content/Images/Banners/banner1.jpeg" class="rounded-3 w-100" alt=""></a>
+        </div>
+        <div class="col-12 col-md-6 p-0 ps-md-2 pb-3">
+            <a href="#"><img src="~/Content/Images/Banners/banner2.jpeg" class="rounded-3 w-100" alt=""></a>
+        </div>
+    </div>    
+
+        <div class="row">
+            <h2 class="h2 my-5 text-center fw-bold">HAFTANIN FIRSAT ÜRÜNLERİ</h2>
+            
+            @foreach (var hafta in ViewBag.HaftaninUrunleri)
+            {
+                <div class="col-12 col-md-6 col-xl-3 p-0 py-3 product">
+                    <div class="card m-auto border-0" style="width:85%;">
+                        <img src="~/Content/Images/ProductImages/@hafta.Id/1.jpg" class="card-img-top m-auto mt-4 mb-3" style="width: 60%;" alt="...">
+                        <div class="card-body px-4">
+                            <div class="d-flex">
+                                <img src="~/Content/Images/Brands/@Url.Content(hafta.BrandID+".jpg")" width="35%" alt="">
+                                <div class="ms-auto d-flex align-items-center pe-1">
+                                    @for (int i = 1; i <= 5; i++)
+                                     {
+
+                                        if (hafta.Rating >= i - 0.5)
+                                        {
+
+                                            <i class='fa-solid fa-star full-star'></i>
+
+                                        }
+                                        else if (hafta.Rating > i - 1)
+                                        {
+                                            <i class='fa-solid fa-star half-star'></i>
+                                        }
+
+                                        else
+                                        {
+                                            <i class='fa-solid fa-star'></i>
+                                        }
+                                     }
+                                </div>
+                            </div>
+
+                            <h5 class="card-title mt-2">@hafta.Name</h5>
+
+                            <div class="fs-2 fw-bold mt-4 lh-1">@hafta.Price TL</div>
+                            <a href="urun?id=@hafta.Id" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+             }
+            
+        </div>
+
+        <div class="row">
+            <h2 class="h2 my-5 text-center fw-bold">SİZİN İÇİN SEÇTİKLERİMİZ</h2>
+            
+            @foreach (var sizin in ViewBag.SizinIcinUrunler)
+            {
+                <div class="col-12 col-md-6 col-xl-3 p-0 py-3 product">
+                    <div class="card m-auto border-0" style="width:85%;">
+                        <img src="~/Content/Images/ProductImages/@sizin.Id/1.jpg" class="card-img-top m-auto mt-4 mb-3" style="width: 60%;" alt="...">
+                        <div class="card-body px-4">
+                            <div class="d-flex">
+                                <img src="~/Content/Images/Brands/@Url.Content(sizin.BrandID+".jpg")" width="35%" alt="">
+                                <div class="ms-auto d-flex align-items-center pe-1">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+
+                                        if (sizin.Rating >= i - 0.5)
+                                        {
+
+                                            <i class='fa-solid fa-star full-star'></i>
+
+                                        }
+                                        else if (sizin.Rating > i - 1)
+                                        {
+                                            <i class='fa-solid fa-star half-star'></i>
+                                        }
+
+                                        else
+                                        {
+                                            <i class='fa-solid fa-star'></i>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <h5 class="card-title mt-2">@sizin.Name</h5>
+
+                            <div class="fs-2 fw-bold mt-4 lh-1">@sizin.Price TL</div>
+                            <a href="urun?id=@sizin.Id" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>

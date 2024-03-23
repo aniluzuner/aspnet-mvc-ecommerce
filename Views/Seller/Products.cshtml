@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Ürünler";
+    Layout = "~/Layouts/SellerLayout.cshtml";
+    var Sellerid = User.Identity.Name;
+}
+
+<div class="container-fluid bg-white rounded-4 h-100">
+    <div class="row h-100">
+        <div class="col-12 p-4 pt-0 h-100 overflow-y-auto">
+            <div class="fs-1 pt-4 pb-3 m-0 fw-bold lh-1 d-flex sticky-top bg-white">Ürünler <a href="/Seller/AddProduct" class="btn btn-dark fs-4 py-1 px-3 ms-auto">Yeni Ürün Ekle</a></div>
+            <table class="table pt-0 mt-0 table-dark table-hover rounded-3 overflow-hidden align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col">Ürün</th>
+                        <th scope="col">Stok</th>
+                        <th scope="col" class="text-center">Kategori ID</th>
+                        <th scope="col" class="text-center">Alt Kategori</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in ViewBag.Urunler)
+                    {
+                        <tr>
+                            <th scope="row" class="fs-5 text-center">@product.Id</th>
+                            <td class="fs-5">@product.Name</td>
+                            <td class="fs-5">@product.Stock</td>
+                            <td class="fs-5 text-center">@product.CategoryID</td>
+                            <td class="fs-5 text-center">@product.SubCategoryID</td>
+                            <td class="fs-5">@product.Price TL</td>
+                            <td>
+                                <a href="/Seller/DeleteProduct/@product.Id" class="btn btn-outline-danger py-1 px-3">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
