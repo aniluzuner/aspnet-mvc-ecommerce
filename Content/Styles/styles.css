@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'cocogoose';
-    src: url('fonts/Cocogoose.eot');
-    src: local('Cocogoose'), url('fonts/Cocogoose.eot?#iefix') format('embedded-opentype'), url('fonts/Cocogoose.woff2') format('woff2'), url('fonts/Cocogoose.woff') format('woff'), url('fonts/Cocogoose.ttf') format('truetype'), url('fonts/Cocogoose.svg#Cocogoose') format('svg');
+    src: url('../fonts/Cocogoose.eot');
+    src: local('Cocogoose'), url('../fonts/Cocogoose.eot?#iefix') format('embedded-opentype'), url('../fonts/Cocogoose.woff2') format('woff2'), url('../fonts/Cocogoose.woff') format('woff'), url('../fonts/Cocogoose.ttf') format('truetype'), url('../fonts/Cocogoose.svg#Cocogoose') format('svg');
     font-weight: normal;
     font-style: normal;
 }
